@@ -21,12 +21,9 @@ path = "src/lib.rs"
 # Enable support of FTPS which requires openssl
 secure = ["openssl"]
 
-# Add debug output (to STDOUT) of commands sent to the server
-# and lines read from the server
-debug_print = []
-
 [dependencies]
 lazy_static = "1"
+log = "0.4.14"
 regex = "1"
 chrono = "0.4"
 openssl = { version = "0.10", optional = true }

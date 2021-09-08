@@ -8,6 +8,7 @@ use super::{
 
 use {
     chrono::{offset::TimeZone, DateTime, Utc},
+    log::debug,
     regex::Regex,
     std::{
         borrow::Cow,
@@ -644,9 +645,7 @@ impl FtpStream {
     }
 
     fn write_str<S: AsRef<str>>(&mut self, command: S) -> crate::Result<()> {
-        if cfg!(feature = "debug_print") {
-            print!("CMD {}", command.as_ref());
-        }
+        debug!(target: "ftp", "CMD {}", command.as_ref());
 
         Ok(self
             .reader
@@ -663,9 +662,7 @@ impl FtpStream {
         let mut line = String::with_capacity(5);
         self.reader.read_line(&mut line)?;
 
-        if cfg!(feature = "debug_print") {
-            print!("FTP {}", line);
-        }
+        debug!(target: "ftp", "FTP {}", line);
 
         if line.len() < 5 {
             return Err(FtpError::InvalidResponse(
@@ -686,9 +683,7 @@ impl FtpStream {
                 return Err(FtpError::ConnectionError(e));
             }
 
-            if cfg!(feature = "debug_print") {
-                print!("FTP {}", line);
-            }
+           debug!(target: "ftp", "FTP {}", line);
         }
 
         line = String::from(line.trim());

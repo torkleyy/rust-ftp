@@ -74,6 +74,7 @@ let _ = ftp_stream.quit();
 )]
 #[macro_use]
 extern crate lazy_static;
+extern crate log;
 extern crate chrono;
 extern crate regex;
 
