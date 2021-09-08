@@ -698,3 +698,9 @@ impl FtpStream {
         }
     }
 }
+
+impl Drop for FtpStream {
+    fn drop(&mut self) {
+        let _ = self.quit();
+    }
+}
